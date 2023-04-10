@@ -63,6 +63,7 @@ steps:
         echo "$(pwd)"
         cp -r /home/vsts/work/1/s/Bold*/* /home/vsts/work/1/s/azure-boldbi
         echo "$(pwd)"
+        rm -r azure.yml
         git config user.email "${{parameters.git_user_email}}"
         git config user.name "${{parameters.git_user_name}}"
 
