@@ -169,7 +169,7 @@
                             @T["This setting will allow the user to hide or show theme options in the dashboard."]
                         </div>
                     </li>
-                    @if (ServerAppConfig.IsSelfHosted)
+                    @if (isSelfHosted)
                     {
                         <li class="dashboard-settings-list usage-analytics-list">
                             @Html.CheckBox("usage-analytics-setting", usageAnalytics, new { @class = "material-checkbox", @autocomplete = "off" })
