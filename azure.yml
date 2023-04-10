@@ -22,9 +22,7 @@ parameters:
   - name: branch
     displayName: Branch
     type: string
-    values:
-      - testing
-      
+
   - name: git_user_email
     displayName: Git User Email
     type: string
