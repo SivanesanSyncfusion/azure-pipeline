@@ -12,12 +12,19 @@ parameters:
   - name: package_link
     displayName: Azure Package URL
     type: string
+    values:
+      - http://files2.syncfusion.com/Installs/BoldBI/08-04-2023/BoldBIEnterpriseEdition_AzurePackage_6.2.7_04082023_043215.zip
+
   - name: repository
     displayName: Repository-URL
     type: string
+    values:
+      - https://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@github.com/SivanesanSyncfusion/azure-pipeline.git
   - name: branch
     displayName: Branch
     type: string
+    values:
+      - testing
 
     
 steps:
