@@ -18,8 +18,7 @@ parameters:
   - name: repository
     displayName: Repository-URL
     type: string
-    values:
-      - https://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@github.com/SivanesanSyncfusion/azure-pipeline.git
+
   - name: branch
     displayName: Branch
     type: string
@@ -60,7 +59,7 @@ steps:
        # Copy the files and folders to the cloned location
        #cp git.sh $folder
 
-       cp ../boldbi/Bold*/* ./
+       cp -r ../boldbi/Bold*/* ./
        
        
        # Commit and push the changes
