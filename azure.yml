@@ -9,6 +9,12 @@ pool:
   vmImage: ubuntu-latest
   
 parameters:
-  - name: nugetserverurls
-    displayName: NuGetServerUrls
+  - name: package_link
+    displayName: Azure Package URL
+    type: string
+  - name: repository
+    displayName: Repository-URL
+    type: string
+  - name: branch
+    displayName: Branch
     type: string
