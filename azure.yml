@@ -34,6 +34,8 @@ steps:
      script: |
        echo "$(pwd)"
        wget --no-check-certificate '${{parameters.package_link}}'
+       unzip Bold*
+       ls
        
 
  - task: Bash@3
@@ -57,8 +59,8 @@ steps:
        # Copy the files and folders to the cloned location
        #cp git.sh $folder
        echo "$(pwd)"
-       unzip ../Bold*
-       cp -r ../Bold*/* ./
+       
+       cp -r /home/vsts/work/1/s/Bold*/* /home/vsts/work/1/s/azure-boldbi
        
        echo "$(pwd)"
        # Commit and push the changes
