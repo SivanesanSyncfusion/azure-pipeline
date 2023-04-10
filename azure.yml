@@ -33,8 +33,6 @@ steps:
      targetType: 'inline'
      script: |
        echo "$(pwd)"
-       mkdir boldbi
-       cd boldbi
        wget --no-check-certificate '${{parameters.package_link}}'
        unzip Bold*
 
