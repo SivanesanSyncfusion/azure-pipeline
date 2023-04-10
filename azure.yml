@@ -3,11 +3,11 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 trigger:
-    - none
+  - none
 
 pool:
   vmImage: ubuntu-latest
-  
+
 parameters:
   - name: package_link
     displayName: Azure Package URL
@@ -25,46 +25,43 @@ parameters:
     values:
       - testing
 
-    
 steps:
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "$(pwd)"
+        wget --no-check-certificate '${{parameters.package_link}}'
+        unzip Bold*
+        ls
 
- - task: Bash@3
-   inputs:
-     targetType: 'inline'
-     script: |
-       echo "$(pwd)"
-       wget --no-check-certificate '${{parameters.package_link}}'
-       unzip Bold*
-       ls
-       
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Check if the branch exists
+        echo "$(pwd)"
+        if git ls-remote --heads '${{parameters.repository}}' '${{parameters.branch}}' | grep -q '${{parameters.branch}}'; then
+          # If the branch exists, clone the repository and switch to the branch
+          git clone -b '${{parameters.branch}}' '${{parameters.repository}}' azure-boldbi
+          cd azure-boldbi
+          echo "$(pwd)"
+        else
+          # If the branch doesn't exist, create it, clone the repository and switch to the branch
+          git clone '${{parameters.repository}}' azure-boldbi
+          cd azure-boldbi
+          git checkout -b '${{parameters.branch}}'
+        fi
 
- - task: Bash@3
-   inputs:
-     targetType: 'inline'
-     script: |
-       # Check if the branch exists
-       echo "$(pwd)"
-       if git ls-remote --heads '${{parameters.repository}}' '${{parameters.branch}}' | grep -q '${{parameters.branch}}'; then
-         # If the branch exists, clone the repository and switch to the branch
-         git clone -b '${{parameters.branch}}' '${{parameters.repository}}' azure-boldbi
-         cd azure-boldbi
-         echo "$(pwd)"
-       else
-         # If the branch doesn't exist, create it, clone the repository and switch to the branch
-         git clone '${{parameters.repository}}' azure-boldbi
-         cd azure-boldbi
-         git checkout -b '${{parameters.branch}}'
-       fi
-       
-       # Copy the files and folders to the cloned location
-       #cp git.sh $folder
-       echo "$(pwd)"
-       ls
-       cp -r /home/vsts/work/1/s/Bold*/* /home/vsts/work/1/s/azure-boldbi
-       ls
-       echo "$(pwd)"
-       # Commit and push the changes
-       git add .
-       git commit -m "Latest packages update"
-       git push '${{parameters.repository}}' '${{parameters.branch}}'
-       ls
+        # Copy the files and folders to the cloned location
+        #cp git.sh $folder
+        echo "$(pwd)"
+        ls
+        cp -r /home/vsts/work/1/s/Bold*/* /home/vsts/work/1/s/azure-boldbi
+        ls
+        echo "$(pwd)"
+        # Commit and push the changes
+        git add .
+        git commit -m "Latest packages update"
+        git push origin '${{parameters.branch}}'
+        ls
