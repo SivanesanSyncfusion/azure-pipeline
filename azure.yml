@@ -13,7 +13,7 @@ parameters:
     displayName: Azure Package URL
     type: string
     values:
-      - http://files2.syncfusion.com/Installs/BoldBI/08-04-2023/BoldBIEnterpriseEdition_AzurePackage_6.2.7_04082023_043215.zip
+      - http://files2.syncfusion.com/Installs/BoldBI/23-11-2022/BoldBIEnterpriseEdition_AzurePackage_5.3.53_11232022_091427.zip
 
   - name: repository
     displayName: Repository-URL
