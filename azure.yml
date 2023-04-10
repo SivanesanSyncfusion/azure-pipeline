@@ -59,7 +59,7 @@ steps:
        # Copy the files and folders to the cloned location
        #cp git.sh $folder
        echo "$(pwd)"
-       cp -r ../boldbi/Bold*/* ./
+       cp -r ../Bold*/* ./
        
        echo "$(pwd)"
        # Commit and push the changes
