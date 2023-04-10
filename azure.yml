@@ -52,6 +52,8 @@ steps:
        
        # Copy the files and folders to the cloned location
        #cp git.sh $folder
+
+       cp ../boldbi/Bold*/* ./
        
        
        # Commit and push the changes
