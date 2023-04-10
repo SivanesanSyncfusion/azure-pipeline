@@ -25,19 +25,19 @@ steps:
  - task: Bash@3
    inputs:
      targetType: 'inline'
-     script: 'mkdir boldbi'
- - task: ExtractFiles@1
-   inputs:
-     archiveFilePatterns: '{{parameters.package_link}}'
-     cleanDestinationFolder: true
-     overwriteExistingFiles: false
-     destinationFolder: boldbi
+     script: |
+       echo "$(pwd)"
+       mkdir boldbi
+       cd boldbi
+       wget --no-check-certificate '${{parameters.package_link}}'
+       unzip Bold*
 
  - task: Bash@3
    inputs:
      targetType: 'inline'
      script: |
        # Check if the branch exists
+       echo "$(pwd)"
        if git ls-remote --heads '${{parameters.repository}}' '${{parameters.branch}}' | grep -q '${{parameters.branch}}'; then
          # If the branch exists, clone the repository and switch to the branch
          git clone -b '${{parameters.branch}}' '${{parameters.repository}}' azure-boldbi
