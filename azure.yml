@@ -24,7 +24,14 @@ parameters:
     type: string
     values:
       - testing
+      
+  - name: git_user_email
+    displayName: Git User Email
+    type: string
 
+  - name: git_user_name
+    displayName: Git User Name
+    type: string
 steps:
   - task: Bash@3
     inputs:
@@ -56,12 +63,11 @@ steps:
         # Copy the files and folders to the cloned location
         #cp git.sh $folder
         echo "$(pwd)"
-        ls
         cp -r /home/vsts/work/1/s/Bold*/* /home/vsts/work/1/s/azure-boldbi
-        ls
         echo "$(pwd)"
-        git config user.email "sivanesan.saravanan@syncfusion.com"
-        git config user.name "SivanesanSyncfusion"
+        git config user.email "${{parameters.git_user_email}}"
+        git config user.name "${{parameters.git_user_name}}"
+
         # Commit and push the changes
         git add .
         git commit -m "Latest packages update"
