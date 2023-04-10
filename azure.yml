@@ -59,11 +59,12 @@ steps:
        # Copy the files and folders to the cloned location
        #cp git.sh $folder
        echo "$(pwd)"
-       
+       ls
        cp -r /home/vsts/work/1/s/Bold*/* /home/vsts/work/1/s/azure-boldbi
-       
+       ls
        echo "$(pwd)"
        # Commit and push the changes
        git add .
        git commit -m "Latest packages update"
        git push origin '${{parameters.branch}}'
+       ls
