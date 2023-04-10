@@ -224,7 +224,18 @@ var Designer = {
                 designerExpDisableInfo: "You do not have permission to edit this datasource. Contact site administrator.",
                 minimumToolText: "The field bind in this section will be considered as a start value of the Gauge Range. For setting static values, use the properties panel.",
 				maximumToolText: "The field bind in this section will be considered as an end value of the Gauge Range. For setting static values, use the properties panel.",
-                rangeNavigatorToolTextMessage:"Range Navigator requires at least one value and one argument to render.The argument section supports only the Date field."
+                rangeNavigatorToolTextMessage:"Range Navigator requires at least one value and one argument to render.The argument section supports only the Date field.",
+				hiddenColumnMessage: {
+					chart: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Column or Row section",
+					radarPolarChart: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Column section",
+					treeMap: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Column section",
+					heatMap: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Size or X-Axis or Y-Axis section",
+					map: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Location Name section",
+					bingMap: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Location Name section",
+					bubbleSactterChart: "The field bind in this section should not be a lower hierarchy compared to the field bind in the X-Axis or Label or Size or Row section",
+					circularGauge: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Series section",
+					comboChart: "The field bind in this section should not be a lower hierarchy compared to the field bind in the Column section"
+				}
             },
             propertyPanel: {
                 headerText: "Properties",
@@ -287,6 +298,17 @@ var Designer = {
 					pagerTemplateItemsText: "Items",
 					disableVirtualization: "Disable Virtual Loading"
 				},
+                summaryRowSettings: {
+                    summaryRowTitle: "Summary Row",
+					enableSummaryRow: "Enable Summary Row",
+					enableSummaryHeight: "Auto Height",
+					summaryheight: "Height",
+					enableSummaryPadding: "Auto Padding",
+					summaryPadding: "Padding",
+					enableSummaryFontSize: "Auto Font Size",
+					summaryFontSize: "Font Size",
+					customizeButton: "Customize"
+                },
                 filter: {
                     actAsMasterWidget: "Act As Master Widget",
                     ignoreFilterActions: "Ignore Filter Actions",
@@ -488,6 +510,12 @@ var Designer = {
                     top: "Top",
                     middle: "Middle",
                     bottom: "Bottom"
+                },
+                emptyPointMode:{
+                    gap: "Gap",
+                    zero: "Zero",
+                    average: "Average",
+                    connect: "Connect"
                 },
                 fontSettings: {
                     categoryDisplayName: "Font Settings",
@@ -870,18 +898,18 @@ var Designer = {
 				dataCacheFlushDBSuccess: "All respective data has been removed",
 				dataCacheFlushDBSuccessTitle: "Clear cache",
 				dataCacheFlushDBErrorTitle: "Clear cache empty message",
-				dataCacheConfigDefaultConnString: "localhost:6379",
-				dataCacheConfigRefreshTime: "Display refresh time",
 				dataCacheTestConnectionSuccess: "Connection established successfully",
 				dataCacheTestConnectionError: "Invalid connection string",
 				dataCacheTestConnectionErrorTitle: "Test connection error message",
 				dataCacheConfigMode: "Cache mode",
 				dataCacheConfigConnString: "Connection string",
+				dataCacheConfigDefaultConnString: "Connection string",
 				dataCacheConfigConnStringValidation: "Connection string is empty",
 				dataCacheConfigTestConn: "Test Connection",
 				dataCacheConfigCacheSize: "Current cache size",
 				dataCacheConfigMaxCacheSize: "Maximum cache size",
 				dataCacheConfigFlushCache: "Clear Cache",
+				dataCacheConfigRefreshTime: "Display refresh time",
 				dataCacheConfigSuccessMessage: "Settings has been updated successfully.",
 				clearCacheButtonText: "Clear",
                 refreshScheduleText: "Refresh Schedule",
@@ -918,7 +946,7 @@ var Designer = {
                 extractModeMessage: "<b>Note:</b> Initially, data will be extracted based on the Max Rows selected in order to proceed with data model creation. The remaining records (there is no limit) will be extracted during the next refresh.",
                 extractModeMessageMongoDB: "<b>Note:</b> Initially it will extract {0} records. Remaining records will be extracted based on configured refresh settings.",
                 extractModeMessageSqlite: "<b>Note:</b> It will extract {0} records only.",
-                liveWebModeMessage: "<b>Note:</b> For optimum performance in live mode Web API, records restricted to 5000 by default. Change the limit from Max Rows option to fetch more records in live mode or use extract mode for more than 5000 records.",
+                liveWebModeMessage: "<b>Note:</b> For optimum performance in live mode Web API, it is recommended to configure Max Rows as 5000 or less. Use extract mode for more than 5000 records.",
                 useAsWindowCredential: "Use as Window Credential",
                 impersonateAuthenticatedUserAfterConnecting: "Impersonate the authenticated user after connecting.",
                 promptForCredentials: "Prompt for credentials",
@@ -1580,6 +1608,12 @@ var Designer = {
                             { projects: { name: '', desc: '' } }
                         ]
                     },
+                    gohighlevel: {
+                        name: 'GoHighLevel',
+                        templates: [
+                            { projects: { name: '', desc: '' } }
+                        ]
+                    },
                 },
                 oauthConnectors: {
                     facebook: "Facebook",
@@ -1637,6 +1671,7 @@ var Designer = {
                     zoom: "Zoom",
                     fitbit: "Fitbit",
                     xeroWorkflowMax: "Xero WorkflowMax",
+                    gohighlevel: "GoHighLevel"
                 },
                 errorMessageForTotalExpressionContainsRowExpression: "Total expression must not contains any ROW expression.",
                 parameterMustBeAnAggregated: "Parameter must be an aggregated expression.",
@@ -1938,7 +1973,7 @@ var Designer = {
                 fiscalYearChangeValidationMsg: "Changing the Fiscal Year will invalidate filters and sorting applied on this column.",
                 tableRemoveMessage: "Removing this table will affect the filter/parameters/expression columns referring to it. Do you still want to continue?",
                 createCategoryMessage: "*Please create a category to save the dashboard",
-                differentSchema: "The new schema differs from the existing one, and so the data settings in the associated widgets cannot be retained. Do you want to continue with the schema changes?",
+                differentSchema: "The new schema differs from the existing one. If you click Yes means it will lose the previous widget and data and display the new connection table data. If you click No, means the data source will be reconnected with new credentials and the widget data will depend on the availability of the table and fields in the target connection.",
                 columnNotExist: "Some of the columns does not exist in new schema and it will affect the dashboard, if removed. Do you want to continue with the schema changes?",
                 doYouWant: "will be deleted. Do you want to continue",
                 tableremove: "Some associated tables will be dropped from the data source.",
@@ -1965,7 +2000,7 @@ var Designer = {
                 slaveOverrideMessage: "The selected widget already listens to ",
                 slaveOverrideAlert: ". Do you want to make it listen to ",
                 largeFileSizeMessage: "The selected file size is too large ",
-                largeFileSizeAlert: "MB. It will take some time to import the data. Do you want to continue?",
+                largeFileSizeAlert: " MB. It will take some time to import the data. Do you want to continue?",
                 removeTableFromMergedDsMessage: "Removing this table will affect the data result. Do you want to continue?",
                 InfluxdbJoinMessage: "InfluxDB does not support join operation. Empty join window will appear.",
                 ElasticsearchJoinMessage: "Elasticsearch does not support join operation. Empty join window will appear.",
@@ -2194,6 +2229,7 @@ var Designer = {
                 applyBtnText: "Apply",
                 cancelBtnText: "Cancel",
                 runBtnText: "Run",
+                selectedAggText: "Aggregation:",
                 greaterOrEqualErrMsgText: "The value should be greater than or equal to the start value.",
                 enterValueWatermarkText: "Enter Value"
             },
@@ -2801,6 +2837,7 @@ var Designer = {
                 almaApplicationText: "Application Key",
                 emptyApplicationnameValidation: "The Application name should not be empty",
                 validApplicationNameValidation: "Please enter a valid Application Key",
+                locationIdDisplayText: "Location Id",
             },
             asanaWebDataSource: {
                 showAttachment: "Show Attachment",
@@ -3017,7 +3054,7 @@ var Designer = {
                 SpecifyFilePath: "Please select a file",
                 fileLimitInfoText: "Max file size: 200 MB",
                 fileNoteForOnpremise: "<b> Note </b> : Larger files will take more time to import",
-                fileSizeAlert:"The selected file size is very large at"
+                fileSizeAlert:"The selected file size is very large at "
 			},
             stripeDataSource: {
                 balance: "Balance",
@@ -5245,7 +5282,11 @@ var Designer = {
             dataPreview: {
                 dataPreview: "Data Preview",
                 noDatasourceFound: "No data sources found",
-                maximumRecordLimit: "Maximum of 1000 records can be previewed"
+                noteText: "Note:",
+                maximumRecordLimit: "A maximum of",
+                totalRecordCount: "records out of",
+                previewCountDefaultValue: "1000",
+                recordCountDisply: "are displayed in the data preview table."
             },
             popNotification: {
                 masterWidgetNoSlaveText: "There are no listener widgets for this period-over-period comparison. Please go to the Filter Configuration window to select listener widgets.",
@@ -5936,6 +5977,47 @@ var Designer = {
                 getWebhookById: 'Get webhook By Id',
                 allLinkedItems: 'All Linked Items',
             },
+            gohighlevelDataSource: {
+                businesses: 'Businesses',
+                businessesbylocation: 'Businesses By Location',
+                calender: "Calendar",
+                calenderEvents: "CalenderEvents",
+                campaigns: "Campaigns",
+                contacts: "Contacts",
+                tasks: "Tasks",
+                appointments: "Appointments",
+                notes: "Notes",
+                search: "Search",
+                conversations: "Conversations",
+                forms: "Forms",
+                triggerLinks: "TriggerLinks",
+                location: "Location",
+                opportunities: "Opportunities",
+                surveys: "Surveys",
+                users: "Users",
+                workFlows: "WorkFlows",
+                allGroups: "All Groups",
+                allCalenders: "All Calenders",
+                allCampaigns: "All Campaigns",
+                allContacts: "All Contacts",
+                allTasks: "All Tasks",
+                allAppointmentsByContact: "All Appointments By Contact",
+                allNotes: "All Notes",
+                allDuplicateContacts: "All Duplicate Contacts",
+                allFormsSubmissions: "All Forms Submissions",
+                allForms: "All Forms",
+                allLinks: "All Links",
+                allTagsByLocation: "All Tags By Location",
+                allCustomFields: "All Custom Fields",
+                allCustomValues: "All Custom Values",
+                allTemplates: "All Templates",
+                searchOpportunities: "Search Opportunities",
+                allPipelines: "All Pipelines",
+                allSubmissions: "All Submissions",
+                allSurveys: "All Surveys",
+                allUsers: "All Users",
+                allWorkFlows: "All Work Flows",
+            },
             almaDataSource: {
                 ping: "Ping",
                 districts: "Districts",
@@ -6085,6 +6167,41 @@ var Designer = {
                 getSubmissionById: "Get Submission By Id",
                 getsubmissionByPermission: "Get Submission By Permission",
                 viewTags: "View Tags"
+            },
+            sendGridDataSource: {
+                campaigns: "Campaigns",
+                others: "Others",
+                campaignsstats: "Campaigns Stats",
+                contacts: "Contacts",
+
+                allcampaigns: "All Campaigns",
+                senderidentities: "Sender Identities",
+                singlesends: "Single Sends",
+                searchsinglesends: "Search Single Sends",
+                segments: "Segments",
+                categories: "Categories",
+                filtermessages: "Filter Messages",
+                accounts: "Accounts",
+                allglobalsuppression: "All Global suppression",
+                allsuppressiongroups: "All suppression groups associated with user",
+                allsuppression: "All suppressions",
+                allinvalidemails: "All invalid emails",
+                automationstats: "Automation Stats",
+                singlesendstats: "Single Send Stats",
+                emailstats: "Email Stats for Categories",
+                sumofemailstats: "Sums of email stats for Categories",
+                globalemailstats: "Global email stats",
+                emailstatsprovince: "Email stats by State/Province",
+                emailstatsdevice: "Email stats by device",
+                emailstatsclient: "Email stats by client",
+                emailstatsmailbox: "Email stats by mailbox",
+                emailstatsbrowser: "Email stats by browser",
+                allbounces: "All Bounces",
+                allblocks: "All Blocks",
+                allspamreports: "All spam reports",
+                searchcontacts: "Search Contacts",
+                contactlists: "Contact lists",
+                recipients: "Recipients"
             },
             freshdeskDataSource: {
                 allTickets: "All Tickets",

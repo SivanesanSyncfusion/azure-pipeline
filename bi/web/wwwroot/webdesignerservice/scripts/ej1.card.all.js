@@ -1,7 +1,7 @@
 /*!
 *  filename: ej1.card.all.js
-*  version : 5.3.53
-*  Copyright Syncfusion Inc. 2001 - 2022. All rights reserved.
+*  version : 6.2.7
+*  Copyright Syncfusion Inc. 2001 - 2023. All rights reserved.
 *  Use of this code is subject to the terms of our license.
 *  A copy of the current license can be obtained at any time by e-mailing
 *  licensing@syncfusion.com. Any infringement will be prosecuted under
@@ -110,7 +110,7 @@ var NumberFormatting = /** @class */ (function () {
             value = { fraction: zero, postFixLabel: "" }; // eslint-disable-line no-param-reassign
             format = stringFormat.replace(decimalplaces, "0");  // eslint-disable-line no-param-reassign
         }
-	if (isDecimalFormatChange) {
+		if (isDecimalFormatChange) {
             format = stringFormat.replace(decimalplaces, "0");
         }
         if (stringFormat.indexOf("N") > lessThanZero && value.fraction < pointZero) {
@@ -252,8 +252,7 @@ NegativeValueFormat = {
     Default: "default",
     NoNegativeSignWithBracket: "nonegativesignwithbracket",
     NegativeSignInSuffix: "negativesigninsuffix"
-};
-;
+};;
 /* eslint no-extra-parens: ["error", "all", { "nestedBinaryExpressions": false }] */
 /* eslint max-params: ["error", 10] */
 'use strict';
