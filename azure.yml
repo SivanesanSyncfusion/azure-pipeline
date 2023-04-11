@@ -28,6 +28,4 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      user=$(az webapp deployment list-publishing-credentials --name azure-siva-arm --resource-group sivanew --query publishingUserName -o tsv)
-      pass=$(az webapp deployment list-publishing-credentials --name azure-siva-arm --resource-group sivanew --query publishingPassword -o tsv)
-      az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7
+      az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7 --manual-integration
