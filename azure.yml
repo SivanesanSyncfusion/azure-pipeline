@@ -28,6 +28,13 @@ parameters:
   - name: git_user_name
     displayName: Git User Name
     type: string
+    
+  - name:  azure_deployment_upgrade
+    displayName: Azure APP Service upgrade
+    type: string
+    values:
+      - False
+      - True
 steps:
   - task: Bash@3
     inputs:
