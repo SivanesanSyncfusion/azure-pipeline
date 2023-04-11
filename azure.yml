@@ -28,4 +28,4 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7 --manual-integration
+      az webapp deployment source sync --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7
