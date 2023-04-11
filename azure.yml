@@ -15,55 +15,10 @@ parameters:
     values:
       - http://files2.syncfusion.com/Installs/BoldBI/08-04-2023/BoldBIEnterpriseEdition_AzurePackage_6.2.7_04082023_043215.zip
 
-  - name: repository
-    displayName: Repository-URL
-    type: string
-
-  - name: branch
-    displayName: Branch
-    type: string
-    values:
-      - testing
-
 steps:
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        echo "$(pwd)"
-        wget --no-check-certificate '${{parameters.package_link}}'
-        unzip Bold*
-        ls
-
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        # Check if the branch exists
-        echo "$(pwd)"
-        if git ls-remote --heads '${{parameters.repository}}' '${{parameters.branch}}' | grep -q '${{parameters.branch}}'; then
-          # If the branch exists, clone the repository and switch to the branch
-          git clone -b '${{parameters.branch}}' '${{parameters.repository}}' azure-boldbi
-          cd azure-boldbi
-          echo "$(pwd)"
-        else
-          # If the branch doesn't exist, create it, clone the repository and switch to the branch
-          git clone '${{parameters.repository}}' azure-boldbi
-          cd azure-boldbi
-          git checkout -b '${{parameters.branch}}'
-        fi
-
-        # Copy the files and folders to the cloned location
-        #cp git.sh $folder
-        echo "$(pwd)"
-        ls
-        cp -r /home/vsts/work/1/s/Bold*/* /home/vsts/work/1/s/azure-boldbi
-        ls
-        echo "$(pwd)"
-        git config user.email "sivanesan.saravanan@syncfusion.com"
-        git config user.name "SivanesanSyncfusion"
-        # Commit and push the changes
-        git add .
-        git commit -m "Latest packages update"
-        git push origin '${{parameters.branch}}'
-        ls
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az webapp stop --name azure-siva-arm --resource-group sivanew-rg'
