@@ -98,7 +98,7 @@ steps:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az webapp deployment source sync --name azure-siva-arm --resource-group sivanew
-          sleep 1800
+          sleep 1500
 
     - task: AzureAppServiceManage@0
       inputs:
