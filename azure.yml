@@ -22,3 +22,10 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az webapp stop --name azure-siva-arm --resource-group sivanew'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az webapp deployment source sync --name azure-siva-arm --resource-group sivanew --source-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7'
+    
