@@ -25,13 +25,11 @@ steps:
   - ${{ if eq(variables.AzureUpgrade, True) }}:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
+        azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az webapp stop --name azure-siva-arm --resource-group sivanew'
+        inlineScript: |
+           az webapp stop --name azure-siva-arm --resource-group sivanew
+           sleep 60
 
-    - task: AzureAppServiceManage@0
-      inputs:
-        azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
-        Action: 'Start Azure App Service'
-        WebAppName: 'azure-siva-arm'
+
