@@ -25,7 +25,7 @@ steps:
   - ${{ if eq(variables.AzureUpgrade, True) }}:
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan'
+        azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
