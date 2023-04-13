@@ -32,9 +32,11 @@ steps:
           # stop the azure app service
             az webapp stop --name azure-siva-arm --resource-group sivanew
             sleep 60
+            echo "App service stopped" 
           # Remove the external repository details in Deployment center
             az webapp deployment source delete --name azure-siva-arm --resource-group sivanew
             sleep 150
+            echo "congigured the details"
           #  Add the repo details in Deployment center 
             az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7 --manual-integration   
           
