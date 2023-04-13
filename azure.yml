@@ -31,5 +31,7 @@ steps:
         inlineScript: |
            az webapp stop --name azure-siva-arm --resource-group sivanew
            sleep 60
+           az webapp deployment source delete --name azure-siva-arm --resource-group sivanew
+           
 
 
