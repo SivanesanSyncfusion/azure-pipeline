@@ -9,6 +9,12 @@ pool:
   vmImage: ubuntu-latest
 
 parameters:
+  - name:  git_commit
+    displayName: Git Package commit
+    type: string
+    values:
+      - False
+      - True
   - name: package_link
     displayName: Azure Package URL
     type: string
@@ -29,12 +35,6 @@ parameters:
     displayName: Git User Name
     type: string
 
-  - name:  git_commit
-    displayName: Git Package commit
-    type: string
-    values:
-      - False
-      - True
 
   - name:  azure_deployment_upgrade
     displayName: Azure APP Service upgrade
