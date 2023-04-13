@@ -29,9 +29,11 @@ steps:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
+        # 
            az webapp stop --name azure-siva-arm --resource-group sivanew
            sleep 60
            az webapp deployment source delete --name azure-siva-arm --resource-group sivanew
-           
+           sleep 5
+           az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7 --manual-integration
 
 
