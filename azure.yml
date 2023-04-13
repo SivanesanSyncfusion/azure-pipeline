@@ -39,9 +39,13 @@ steps:
         echo 'Hello world'
         ls
         echo "Hi sivanesan"
+  - ${{ else }}:
+      - script: echo "It is commit not triggered"
   - ${{ if eq(variables.AzureUpgrade, True) }}:
   - task: AzureAppServiceManage@0
     inputs:
       azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
       Action: 'Stop Azure App Service'
       WebAppName: 'azure-siva-arm'
+  - ${{ else }}:
+      - script: echo "Service not trigerred"
