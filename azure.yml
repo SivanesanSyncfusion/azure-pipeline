@@ -50,4 +50,4 @@ steps:
               sleep 150
               echo "congigured the details"
             #  Add the repo details in Deployment center 
-              az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6 --manual-integration
+              az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url "${{parameters.git_link}}" --branch v6.1.8 --manual-integration
