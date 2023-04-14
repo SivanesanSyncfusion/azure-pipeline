@@ -22,6 +22,6 @@ steps:
   inputs:
         targetType: 'inline'
         script: |
-          echo '$(set_image_tag.outputs["set_image_tag.IMAGE_TAG"])'
+          echo $(set_image_tag.outputs["set_image_tag.IMAGE_TAG"])
 
       
