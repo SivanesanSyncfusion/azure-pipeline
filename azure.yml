@@ -14,7 +14,6 @@ steps:
     targetType: 'inline'
     script: |
       URL=https://s3.amazonaws.com/files2.syncfusion.com/Installs/BoldBI/148448-Integrating-single-docker-image-creation/13-04-2023/BoldBIEnterpriseEdition_Linux_Kubernetes_6.3.2_04132023_054408.zip
-      wget $URL
       IMAGE_TAG=$(echo "$URL" | grep -oP 'Linux_Kubernetes_\K[\d\.]+_\d{8}_\d{6}')
       echo "Image tag: $IMAGE_TAG"
   name: set_image_tag
