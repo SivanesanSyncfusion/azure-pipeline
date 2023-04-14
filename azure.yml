@@ -8,27 +8,22 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-parameters:
-  - name: package_link
-    displayName: Azure Package URL
-    type: string
-    values:
-      - http://files2.syncfusion.com/Installs/BoldBI/08-04-2023/BoldBIEnterpriseEdition_AzurePackage_6.2.7_04082023_043215.zip
-
 steps:
-- task: AzureCLI@2
+- task: Bash@3
   inputs:
-    azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az webapp stop --name azure-siva-arm --resource-group sivanew'
-- task: AzureCLI@2
+    targetType: 'inline'
+    script: |
+      URL=https://s3.amazonaws.com/files2.syncfusion.com/Installs/BoldBI/148448-Integrating-single-docker-image-creation/13-04-2023/BoldBIEnterpriseEdition_Linux_Kubernetes_6.3.2_04132023_054408.zip
+      wget $URL
+      IMAGE_TAG=$(echo "$URL" | grep -oP 'Linux_Kubernetes_\K[\d\.]+_\d{8}_\d{6}')
+      echo "Image tag: $IMAGE_TAG"
+  name: set_image_tag
+  displayName: 'Set image tag'
+- task: Bash@3
   inputs:
-    azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      user=$(az webapp deployment list-publishing-credentials --name azure-siva-arm --resource-group sivanew --query publishingUserName -o tsv)
-      pass=$(az webapp deployment list-publishing-credentials --name azure-siva-arm --resource-group sivanew --query publishingPassword -o tsv)
-      az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url https://github.com/boldbi/azure-arm-template.git --branch v6.2.7
+        targetType: 'inline'
+        script: |
+          echo "##vso[task.setvariable variable=IMAGE_TAG]$(set_image_tag.outputs["set_image_tag.IMAGE_TAG"])";  
+          echo "$IMAGE_TAG"
+
       
