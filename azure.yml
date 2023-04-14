@@ -15,13 +15,15 @@ steps:
     script: |
       URL=https://s3.amazonaws.com/files2.syncfusion.com/Installs/BoldBI/148448-Integrating-single-docker-image-creation/13-04-2023/BoldBIEnterpriseEdition_Linux_Kubernetes_6.3.2_04132023_054408.zip
       IMAGE_TAG=$(echo "$URL" | grep -oP 'Linux_Kubernetes_\K[\d\.]+_\d{8}_\d{6}')
+      echo "##vso[task.setvariable variable=IMAGE_TAG]$IMAGE_TAG"
       echo "Image tag: $IMAGE_TAG"
   name: set_image_tag
   displayName: 'Set image tag'
-- task: Bash@3
-  inputs:
-        targetType: 'inline'
-        script: |
-          echo $(set_image_tag.outputs["set_image_tag.IMAGE_TAG"])
+- script: |
+    echo "Image tag: $IMAGE_TAG"
+  displayName: 'Print image tag'
+  env:
+    IMAGE_TAG: $(set_image_tag.outputs['set_image_tag.IMAGE_TAG'])
+
 
       
