@@ -1,0 +1,17 @@
+parameters:
+- name: vmName
+  type: string
+  default: "syncfusion"
+
+jobs:
+- job: StopVM
+  displayName: "Stop VM at night"
+  steps:
+  - task: AzurePowerShell@5
+    inputs:
+      azureSubscription: 'AzureDevTest - Enterprise Dev/Test'
+      ScriptType: 'InlineScript'
+      Inline: |
+        $vmName = "$(vmName)"
+        Write-Host "Stopping VM: $vmName"
+        # Add Azure PowerShell commands to stop the VM here
