@@ -1,8 +1,6 @@
-trigger: none
-
 schedules:
-- cron: "0 7 * * 1-5"
-  displayName: Morning Schedule (Mon-Fri)
+- cron: "44 18 * * 1-5"
+  displayName: Evening Schedule (Mon-Fri) - Main Branch
   branches:
     include:
       - scheduler
@@ -11,7 +9,7 @@ schedules:
     vmName: "syncfusion"
 
 - cron: "0 22 * * 1-5"
-  displayName: Night Schedule (Mon-Fri)
+  displayName: Night Schedule (Mon-Fri) - Main Branch
   branches:
     include:
       - scheduler
@@ -23,13 +21,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-- template: morning_schedule.yml
-  parameters:
-    vmName: $(vmName)
+ - template: morning_schedule.yml
+   parameters:
+     vmName: $(vmName)
 
-- template: night_schedule.yml
-  parameters:
-    vmName: $(vmName)
+ - template: night_schedule.yml
+   parameters:
+     vmName: $(vmName)
 
-- script: echo "This is a scheduled build at 7:00 AM and 10:00 PM from Monday to Friday."
-  displayName: 'Scheduled Task'
+ - script: echo "This is a scheduled build at 6:43 PM and 10:00 PM from Monday to Friday."
+   displayName: 'Scheduled Task'
+
