@@ -9,9 +9,10 @@ jobs:
   steps:
   - task: AzurePowerShell@5
     inputs:
-      azureSubscription: 'AzureDevTest - Enterprise Dev/Test'
+      azureSubscription: 'hotfix'
       ScriptType: 'InlineScript'
       Inline: |
         $vmName = "$(vmName)"
         Write-Host "Starting VM: $vmName"
         # Add Azure PowerShell commands to start the VM here
+        az vm stop --name syncfusion --resource-group boldbiteamlab-BoldBI-On-Premise-238719
