@@ -15,4 +15,4 @@ jobs:
         $vmName = "$(vmName)"
         Write-Host "Starting VM: $vmName"
         # Add Azure PowerShell commands to start the VM here
-        az vm stop --name syncfusion --resource-group boldbiteamlab-BoldBI-On-Premise-238719
+        az vm start --name syncfusion --resource-group boldbiteamlab-BoldBI-On-Premise-238719
