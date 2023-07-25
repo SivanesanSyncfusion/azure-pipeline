@@ -3,17 +3,15 @@ parameters:
   type: string
   default: "syncfusion"
 
-jobs:
-- job: StopVM
+steps:
+- task: AzurePowerShell@5
   displayName: "Stop VM at night"
-  steps:
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'hotfix'
-      ScriptType: 'InlineScript'
-      Inline: |
-        $vmName = "$(vmName)"
-        Write-Host "Stopping VM: $vmName"
-        # Add Azure PowerShell commands to stop the VM here
-        az vm stop --name $vmName --resource-group boldbiteamlab-BoldBI-On-Premise-238719
-        
+  inputs:
+    azureSubscription: 'hotfix'
+    ScriptType: 'InlineScript'
+    Inline: |
+      $vmName = "$(vmName)"
+      Write-Host "Stopping VM: $vmName"
+      # Add Azure PowerShell commands to stop the VM here
+      az vm stop --name $vmName --resource-group boldbiteamlab-BoldBI-On-Premise-238719
+
