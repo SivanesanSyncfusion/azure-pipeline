@@ -3,17 +3,15 @@ parameters:
   type: string
   default: "syncfusion"
 
-jobs:
-- job: StartVM
+steps:
+- task: AzurePowerShell@5
   displayName: "Start VM in the morning"
-  steps:
-  - task: AzurePowerShell@5
-    inputs:
-      azureSubscription: 'hotfix'
-      ScriptType: 'InlineScript'
-      Inline: |
-        $vmName = "$(vmName)"
-        Write-Host "Starting VM: $vmName"
-        # Add Azure PowerShell commands to start the VM here
-        az vm start --name $vmName --resource-group boldbiteamlab-BoldBI-On-Premise-238719
+  inputs:
+    azureSubscription: 'hotfix'
+    ScriptType: 'InlineScript'
+    Inline: |
+      $vmName = "$(vmName)"
+      Write-Host "Starting VM: $vmName"
+      # Add Azure PowerShell commands to start the VM here
+      az vm start --name $vmName --resource-group boldbiteamlab-BoldBI-On-Premise-238719
 
