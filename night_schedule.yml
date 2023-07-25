@@ -15,5 +15,5 @@ jobs:
         $vmName = "$(vmName)"
         Write-Host "Stopping VM: $vmName"
         # Add Azure PowerShell commands to stop the VM here
-        az vm stop --name syncfusion --resource-group boldbiteamlab-BoldBI-On-Premise-238719
+        az vm stop --name $vmName --resource-group boldbiteamlab-BoldBI-On-Premise-238719
         
