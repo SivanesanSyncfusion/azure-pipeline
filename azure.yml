@@ -2,14 +2,14 @@ trigger:
   - none
 
 schedules:
-- cron: '27 17 * * 1-5'
+- cron: '38 17 * * 1-5'
   displayName: Test1
   always: true
   branches:
     include:
     - scheduler
 
-- cron: '29 17 * * 1-5'
+- cron: '40 17 * * 1-5'
   displayName: Test2
   always: true
   branches:
@@ -38,4 +38,20 @@ steps:
       
       echo 'Hello world Test2'
   condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2') 
+
   
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
+    scriptType: 'batch'
+    scriptLocation: 'scriptPath'
+    scriptPath: 'az vm start --resource-group server-docker --name server'
+  condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test1')
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
+    scriptType: 'batch'
+    scriptLocation: 'scriptPath'
+    scriptPath: 'az vm stop --resource-group server-docker --name server'
+  condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2')
