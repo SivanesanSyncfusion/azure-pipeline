@@ -2,14 +2,14 @@ trigger:
   - none
 
 schedules:
-- cron: '25 22 * * 1-5'
+- cron: '27 17 * * 1-5'
   displayName: Test1
   always: true
   branches:
     include:
     - scheduler
 
-- cron: '26 22 * * 1-5'
+- cron: '29 17 * * 1-5'
   displayName: Test2
   always: true
   branches:
