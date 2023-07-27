@@ -2,14 +2,14 @@ trigger:
   - none
 
 schedules:
-- cron: '38 17 * * 1-5'
+- cron: '56 17 * * 1-5'
   displayName: Test1
   always: true
   branches:
     include:
     - scheduler
 
-- cron: '40 17 * * 1-5'
+- cron: '58 17 * * 1-5'
   displayName: Test2
   always: true
   branches:
@@ -45,7 +45,7 @@ steps:
     azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
     scriptType: 'batch'
     scriptLocation: 'scriptPath'
-    scriptPath: 'az vm start --resource-group server-docker --name server'
+    scriptPath: 'az vm start --resource-group boldbiteamlab-BoldBI-On-Premise-238719 --name syncfusion'
   condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test1')
 
 - task: AzureCLI@2
@@ -53,5 +53,5 @@ steps:
     azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
     scriptType: 'batch'
     scriptLocation: 'scriptPath'
-    scriptPath: 'az vm stop --resource-group server-docker --name server'
+    scriptPath: 'az vm stop --resource-group boldbiteamlab-BoldBI-On-Premise-238719 --name syncfusion'
   condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2')
