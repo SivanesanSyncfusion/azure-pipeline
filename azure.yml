@@ -1,37 +1,41 @@
-trigger: none
+trigger:
+  - none
 
 schedules:
-- cron: "43 18 * * 1-5"
-  displayName: Evening Schedule (Mon-Fri) - Main Branch
+- cron: '25 22 * * 1-5'
+  displayName: Test1
+  always: true
   branches:
     include:
-      - scheduler
-  always: true
+    - scheduler
 
-- cron: "0 22 * * 1-5"
-  displayName: Night Schedule (Mon-Fri) - Main Branch
+- cron: '26 22 * * 1-5'
+  displayName: Test2
+  always: true
   branches:
     include:
-      - scheduler
-  always: true
+    - scheduler
 
 pool:
   vmImage: 'ubuntu-latest'
 
-jobs:
-- job: MorningAndNightSchedule
-  displayName: 'Scheduled Task'
-  variables:
-    vmName: "syncfusion"
-  steps:
-  - template: morning_schedule.yml
-    parameters:
-      vmName: $(vmName)
+steps:
 
-  - template: night_schedule.yml
-    parameters:
-      vmName: $(vmName)
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world Test1'
+  condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test1') 
 
-  - script: echo "This is a scheduled build at 6:43 PM and 10:00 PM from Monday to Friday."
-    displayName: 'Print Message'
-
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world Test2'
+  condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2') 
+  
