@@ -2,14 +2,14 @@ trigger:
   - none
 
 schedules:
-- cron: '24 7 * * 1-5'
+- cron: '30 1 * * 1-5'
   displayName: Task1
   always: true
   branches:
     include:
     - scheduler
 
-- cron: '10 18 * * 1-5'
+- cron: '0 17 * * 1-5'
   displayName: Task2
   always: true
   branches:
@@ -22,6 +22,7 @@ pool:
 steps:
 
 - task: AzureCLI@2
+  displayName: VM start
   inputs:
     azureSubscription: 'hotfix'
     scriptType: 'bash'
@@ -30,18 +31,29 @@ steps:
   condition: eq(variables['Build.CronSchedule.DisplayName'], 'Task1')
 
 - task: AzureCLI@2
+  displayName: VM Stop
   inputs:
     azureSubscription: 'hotfix'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az vm start --resource-group server-docker --name server'
+    inlineScript: 'az vm stop --resource-group boldbiteamlab-boldbi-on-premise-238719 --name syncfusion'
   condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2')
 
 - task: AzureCLI@2
+  displayName: Azure Plan P1V3
   inputs:
     azureSubscription: 'hotfix'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az appservice plan update --name BoldBIAppSvcPlan --resource-group boldbiteamlab-BoldBI-On-Premise-238719 --sku P1V3'
- # condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2')
+  condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test1')
+
+- task: AzureCLI@2
+  displayName: Azure Plan B1
+  inputs:
+    azureSubscription: 'hotfix'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az appservice plan update --name BoldBIAppSvcPlan --resource-group boldbiteamlab-BoldBI-On-Premise-238719 --sku B1'
+  condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2')
   
