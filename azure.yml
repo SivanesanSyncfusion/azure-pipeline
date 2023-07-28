@@ -2,7 +2,7 @@ trigger:
   - none
 
 schedules:
-- cron: '08 18 * * 1-5'
+- cron: '24 7 * * 1-5'
   displayName: Test1
   always: true
   branches:
@@ -41,10 +41,10 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
+    azureSubscription: 'hotfix'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az vm start --resource-group server-docker --name server'
+    inlineScript: 'az vm start --resource-group boldbiteamlab-boldbi-on-premise-238719 --name syncfusion'
   condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test1')
 
 - task: AzureCLI@2
