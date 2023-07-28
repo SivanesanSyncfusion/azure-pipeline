@@ -42,6 +42,6 @@ steps:
     azureSubscription: 'hotfix'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az appservice plan update --name hotfix-arm --resource-group boldbiteamlab-BoldBI-On-Premise-238719 --sku B1'
+    inlineScript: 'az appservice plan update --name BoldBIAppSvcPlan --resource-group boldbiteamlab-BoldBI-On-Premise-238719 --sku B1'
  # condition: eq(variables['Build.CronSchedule.DisplayName'], 'Test2')
   
