@@ -26,9 +26,9 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        sed -i 's/#registry#/$(REGISTRY)/g' .npmrc
-        sed -i 's/#username#/$(USERNAME)/g' .npmrc
-        sed -i 's/#password#/$(PASSWORD)/g' .npmrc
+        sed -i 's|#registry#|$(REGISTRY)|g' .npmrc
+        sed -i 's|#username#|$(USERNAME)|g' .npmrc
+        sed -i 's|#password#|$(PASSWORD)|g' .npmrc
         npm install
         npm install -g typescript
         tsc -v
