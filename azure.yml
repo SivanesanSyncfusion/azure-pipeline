@@ -3,25 +3,35 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 trigger:
-  - none
+  branches:
+    include:
+      - development
+      - hotfix/boldbi*
+      - release/boldbi*
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      URL=https://s3.amazonaws.com/files2.syncfusion.com/Installs/BoldBI/148448-Integrating-single-docker-image-creation/13-04-2023/BoldBIEnterpriseEdition_Linux_Kubernetes_6.3.2_04132023_054408.zip
-      IMAGE_TAG=$(echo "$URL" | grep -oP 'Linux_Kubernetes_\K[\d\.]+_\d{8}_\d{6}')
-      echo "##vso[task.setvariable variable=IMAGE_TAG]$IMAGE_TAG"
-      echo "Image tag: $IMAGE_TAG"
-
-- script: |
-    echo "Image tag: $IMAGE_TAG"
-  displayName: 'Print image tag'
-
-
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo 'Build_SourceBranchName'
+        echo $(Build.SourceBranchName)
+        echo '$Build_SourceBranch'
+        echo $(Build.SourceBranch)
+    displayName: 'Branch'  
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd embed-sdk/boldbi-sdk
+        npm install
+        npm install -g typescript
+        tsc -v
+        tsc
+        npm run build-webpack
+    displayName: 'NPM Build' 
 
       
