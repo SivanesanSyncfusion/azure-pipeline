@@ -32,16 +32,11 @@ steps:
         tsc -v
         tsc
         npm run build-webpack
-        export studio_version="6.3"
-        export revisionnumber="2"
+        export studio_version=$(STUDIO_VERSION)
+        export revisionnumber=$(REVISIONNUMBER)
         gulp update-version
         pwd
 
-  - task: Npm@1
-    inputs:
-      command: 'publish'
-      workingDir: '/home/vsts/work/1/s'
-      publishEndpoint: 'npm-development'
   
 
 
