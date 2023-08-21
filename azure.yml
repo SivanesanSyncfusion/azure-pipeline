@@ -35,8 +35,13 @@ steps:
         export studio_version="6.3"
         export revisionnumber="2"
         gulp update-version
-        ls
-    displayName: 'NPM Build' 
+        pwd
+
+  - task: Npm@1
+    inputs:
+      command: 'publish'
+      workingDir: '~/work/1/s/'
+      publishEndpoint: 'npm-development'
   
 
 
