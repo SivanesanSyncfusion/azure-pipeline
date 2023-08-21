@@ -35,7 +35,11 @@ steps:
         export studio_version="6.3"
         export revisionnumber="2"
         gulp update-version
-        npm publish
+        ls
     displayName: 'NPM Build' 
+  
+
+
+
 
       
