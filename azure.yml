@@ -8,3 +8,5 @@ trigger:
 pool:
   name: self-host-agent
 
+steps:
+  - script: echo "Hello world"
