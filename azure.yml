@@ -37,12 +37,10 @@ steps:
         export studio_version=$(STUDIO_VERSION)
         export revisionnumber=$(REVISIONNUMBER)
         gulp update-version
-        npm publish
         cat .npmrc
         pwd
+        npm publish
     displayName: 'Build and Deploy'
-
-  
 
 
 
