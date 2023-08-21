@@ -35,7 +35,12 @@ steps:
         export studio_version=$(STUDIO_VERSION)
         export revisionnumber=$(REVISIONNUMBER)
         gulp update-version
+        sed -i 's|#registry#|$(REGISTRY)|g' .npmrc
+        sed -i 's|#username#|$(USERNAME)|g' .npmrc
+        sed -i 's|#password#|$(PASSWORD)|g' .npmrc
+        cat .npmrc
         pwd
+    displayName: 'Build and Deploy'
 
   
 
