@@ -40,7 +40,7 @@ steps:
   - task: Npm@1
     inputs:
       command: 'publish'
-      workingDir: '~/work/1/s/'
+      workingDir: '/home/vsts/work/1/s'
       publishEndpoint: 'npm-development'
   
 
