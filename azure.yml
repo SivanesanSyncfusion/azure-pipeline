@@ -32,6 +32,10 @@ steps:
         tsc -v
         tsc
         npm run build-webpack
+        export studio_version="6.3"
+        export revisionnumber="2"
+        gulp update-version
+        npm publish
     displayName: 'NPM Build' 
 
       
