@@ -26,6 +26,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        ls
         cd embed-sdk/boldbi-sdk
         npm install
         npm install -g typescript
