@@ -27,7 +27,7 @@ steps:
       targetType: 'inline'
       script: |
         ls
-        cd embed-sdk/boldbi-sdk
+        # cd embed-sdk/boldbi-sdk
         npm install
         npm install -g typescript
         tsc -v
