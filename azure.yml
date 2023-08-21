@@ -6,48 +6,5 @@ trigger:
   - none
 
 pool:
-  vmImage: ubuntu-latest
+  name: self-host-agent
 
-parameters:
-  - name:  command
-    displayName: Command
-    type: string
-    values:
-      - False
-      - True
-  - name: git_link
-    displayName: GitHub
-    type: string
-
-   
-  - name:  azure_deployment_upgrade
-    displayName: Azure APP Service upgrade
-    type: string
-    values:
-      - False
-      - True
-
-variables:
-- name: Command_shell
-  value: ${{parameters.command}}
-
-- name: AzureUpgrade
-  value: ${{parameters.azure_deployment_upgrade}}
-
-steps:
-      - task: AzureCLI@2
-        inputs:
-          azureSubscription: 'SF3362-BoldBI-DevOps-SivanesanSaravanan(bbceebb1-216e-46f8-82c1-500bdea55db4)'
-          scriptType: 'bash'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            # stop the azure app service
-              az webapp stop --name azure-siva-arm --resource-group sivanew
-              sleep 60
-              echo "App service stopped" 
-            # Remove the external repository details in Deployment center
-              az webapp deployment source delete --name azure-siva-arm --resource-group sivanew
-              sleep 150
-              echo "congigured the details"
-            #  Add the repo details in Deployment center 
-              az webapp deployment source config --name azure-siva-arm --resource-group sivanew --repo-url "${{parameters.git_link}}" --branch v6.1.8 --manual-integration
