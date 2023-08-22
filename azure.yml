@@ -10,3 +10,5 @@ pool:
 
 steps:
   - script: echo "Hello world"
+  - script: free -h
+  - script: lscpu
