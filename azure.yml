@@ -2,13 +2,21 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-trigger:
-  - none
 
-pool:
-  name: self-host-agent
 
-steps:
-  - script: echo "Hello world"
-  - script: free -h
-  - script: lscpu
+trigger: none
+
+jobs:
+- job: DeploymentJob
+  pool:
+   name: syncfusion-test2
+  
+  steps:
+  - task: SSH@0
+    inputs:
+      sshEndpoint: 'Hotfix-Docker-VM'
+      runOptions: 'inline'
+      inline: |
+        echo "List of docker container"
+        sudo docker ps -a
+      readyTimeout: '20000'
