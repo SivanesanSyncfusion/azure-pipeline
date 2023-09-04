@@ -8,7 +8,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
   
-  steps:
+steps:
   - task: SSH@0
     inputs:
       sshEndpoint: 'Hotfix-Docker-VM'
