@@ -19,4 +19,4 @@ jobs:
       inline: |
         echo "List of docker container"
         sudo docker ps -a
-      readyTimeout: '20000'
+      readyTimeout: '90000'
